@@ -58,8 +58,8 @@ public class Action implements RBACResource, IReferenceItem
     private String _strName;
     private String _strDescription;
     private Icon _icon;
-    private State _stateBefore;
     private State _stateAfter;
+    private State _alternativeStateAfter;
     private Workflow _workflow;
     private boolean _bAutomaticState;
     private boolean _bIsMassAction;
@@ -67,6 +67,7 @@ public class Action implements RBACResource, IReferenceItem
     private List<ITask> _listTasks;
     private int _nOrder;
     private boolean _bAutomaticReflexiveAction;
+    private List<Integer> _listIdStateBefore;
 
     /**
      *
@@ -152,27 +153,6 @@ public class Action implements RBACResource, IReferenceItem
     }
 
     /**
-     * Return the State of the document before processing the action
-     * 
-     * @return The StateBefore
-     */
-    public State getStateBefore( )
-    {
-        return _stateBefore;
-    }
-
-    /**
-     * Set the State of the document before processing the action
-     * 
-     * @param stateBefore
-     *            The StateBefore
-     */
-    public void setStateBefore( State stateBefore )
-    {
-        _stateBefore = stateBefore;
-    }
-
-    /**
      * Returns the State of the document after processing the action
      * 
      * @return The StateAfter
@@ -183,7 +163,7 @@ public class Action implements RBACResource, IReferenceItem
     }
 
     /**
-     * Set the State of the document after processing the action
+     * Set the State to set after processing the action
      * 
      * @param stateAfter
      *            The StateAfter
@@ -193,6 +173,28 @@ public class Action implements RBACResource, IReferenceItem
         _stateAfter = stateAfter;
     }
 
+    /**
+     * Returns the alternative State to set when a task returns false
+     * 
+     * @return The StateAfterFailure
+     */
+    public State getAlternativeStateAfter( )
+    {
+        return _alternativeStateAfter;
+    }
+
+    /**
+     * Set the State to set after processing the action (when the action returns false)
+     * 
+     * @param alternativeStateAfter
+     *            The alternative StateAfter
+     */
+    public void setAlternativeStateAfter( State alternativeStateAfter )
+    {
+        _alternativeStateAfter = alternativeStateAfter;
+    }
+
+    
     /**
      * RBAC resource implementation
      * 
@@ -354,4 +356,24 @@ public class Action implements RBACResource, IReferenceItem
     {
         return _listTasks ;
     }
+    
+    /**
+     * get the list of all state before associated to the action
+     * 
+     * @return 
+     *         the list of all state before associated to the action
+     */
+    public List<Integer> getListIdStateBefore() {
+		return _listIdStateBefore;
+	}
+
+    /**
+     * set the list of all state before associated to the action
+     * 
+     * @param listStateBefore
+     *            the list of all state before
+     */
+	public void setListIdStateBefore(List<Integer> listIdStateBefore) {
+		this._listIdStateBefore = listIdStateBefore;
+	}
 }
